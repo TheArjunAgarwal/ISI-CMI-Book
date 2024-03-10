@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{float}
+
+% Define theorem styles
+\newtheoremstyle{problemstyle}
+  {\topsep} % Space above
+  {\topsep} % Space below
+  {\normalfont} % Body font
+  {} % Indent amount
+  {\bfseries\color{blue}} % Theorem head font
+  {.} % Punctuation after theorem head
+  {.5em} % Space after theorem head
+  {} % Theorem head spec (can be left empty, meaning ‘normal’)
+  
+\newtheoremstyle{solutionstyle}
+  {\topsep} % Space above
+  {\topsep} % Space below
+  {} % Body font
+  {} % Indent amount
+  {\bfseries\color{brown}} % Theorem head font
+  {.} % Punctuation after theorem head
+  {.5em} % Space after theorem head
+  {} % Theorem head spec (can be left empty, meaning ‘normal’)
+
+% Define problem and solution environments
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+
+\theoremstyle{solutionstyle}
+\newtheorem*{solution}{Solution}
+
+% Define problem types
+\newcommand{\probtype}[2]{%
+  \newcounter{#1}
+  \setcounter{#1}{0}
+  \newenvironment{#1}[1][]{%
+    \stepcounter{#1}%
+    \begin{tcolorbox}[colback=green!10!white,colframe=green!60!black,title={#2 \arabic{#1}\ifx\empty##1\relax\else: ##1\fi}]
+  }{\end{tcolorbox}}
+}
+
+% Problem types
+\probtype{N}{N}%Number Theory
+\probtype{G}{G} %Geometry
+\probtype{A}{A} %Algebra
+\probtype{CB}{CB} %Combi
+\probtype{CL}{CL} % Calc
+\probtype{T}{T} % Trigo
+\probtype{CG}{CG} % Coordinate
+\probtype{STAT}{STAT} % Stat
+\probtype{M}{M} % Misc
+
+% Define idea environment
+\newcounter{idea}[section]
+\renewcommand{\theidea}{\thesection.\arabic{idea}}
+\newenvironment{idea}{%
+    \refstepcounter{idea}%
+    \begin{tcolorbox}[colback=blue!10!white,colframe=blue!60!black,title={Idea \theidea}]
+}{%
+    \end{tcolorbox}
+}
+%commands
+\newcommand{\dg}{^\circ}
+\newcommand{\ii}{\item}
